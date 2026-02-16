@@ -1,0 +1,27 @@
+name: Node CI CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd cicd/nodeapp || exit
+          git pull
+          docker rm -f nodeapp || true
+          docker rmi mynodeapp || true
+          docker build -t mynodeapp .
+          docker run -d -p 80:3000 --name nodeapp mynodeapp
+
