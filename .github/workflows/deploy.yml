@@ -18,7 +18,7 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd cicd/nodeapp || exit
+          cd /home/ubuntu/node-js- || exit
           git pull
           docker rm -f nodeapp || true
           docker rmi mynodeapp || true
