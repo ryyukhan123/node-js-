@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("Hello Ryyan! Node app running on EC2 hello ji me ryyan ji with AWS 🚀");
+  res.send("Hello Mumma! Node app running on EC2 hello ji me ryyan ji with AWS 🚀");
 });
 
 app.listen(3000, () => {
